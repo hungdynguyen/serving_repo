@@ -1,0 +1,18 @@
+services:
+  api:
+    build: .
+    container_name: model_api
+    ports:
+      - "8000:8000"
+    environment:
+      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI}
+      - MODEL_URI=${MODEL_URI}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      # - MLFLOW_S3_ENDPOINT_URL=${MLFLOW_S3_ENDPOINT_URL} 
+    networks:
+      - mlops_net
+  
+networks:
+  mlops_net:
+    external: true
